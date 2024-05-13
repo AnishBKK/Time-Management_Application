@@ -38,54 +38,63 @@ namespace MiniProject_1
                 DateTimeStyles.None, out dateTime) && DateTime.TryParseExact(endTime, format, CultureInfo.InvariantCulture,
                 DateTimeStyles.None, out dateTime))
             {
-                string[] startTime2 = startTime.Split('/', ':', ' ');
-                string[] stopTime2 = endTime.Split('/', ':', ' ');
-
-                if (Convert.ToInt32(startTime2[3]) > Convert.ToInt32(stopTime2[3]) && Convert.ToInt32(startTime2[0]) < Convert.ToInt32(stopTime2[0]))
+                if (Activity != "")
                 {
-                    h = (24 - Convert.ToInt32(startTime2[3]) + Convert.ToInt32(stopTime2[3])).ToString();
-                }
-                else
-                {
-                    h = (Convert.ToInt32(stopTime2[3]) - Convert.ToInt32(startTime2[3])).ToString();
-                }
+                    string[] startTime2 = startTime.Split('/', ':', ' ');
+                    string[] stopTime2 = endTime.Split('/', ':', ' ');
 
-                if (Convert.ToInt32(startTime2[4]) > Convert.ToInt32(stopTime2[4]) && Convert.ToInt32(startTime2[3]) < Convert.ToInt32(stopTime2[3]))
-                {
-                    m = (60 - Convert.ToInt32(startTime2[4]) + Convert.ToInt32(stopTime2[4])).ToString();
-                }
-                else
-                {
-                    m = (Convert.ToInt32(stopTime2[4]) - Convert.ToInt32(startTime2[4])).ToString();
-                }
+                    if (Convert.ToInt32(startTime2[3]) > Convert.ToInt32(stopTime2[3]))
+                    {
+                        h = (24 - Convert.ToInt32(startTime2[3]) + Convert.ToInt32(stopTime2[3])).ToString();
+                    }
+                    else
+                    {
+                        h = (Convert.ToInt32(stopTime2[3]) - Convert.ToInt32(startTime2[3])).ToString();
+                    }
 
-                if (Convert.ToInt32(startTime2[5]) > Convert.ToInt32(stopTime2[5]) && Convert.ToInt32(startTime2[4]) < Convert.ToInt32(stopTime2[4]))
-                {
-                    s = (60 - Convert.ToInt32(startTime2[5]) + Convert.ToInt32(stopTime2[5])).ToString();
-                }
-                else
-                {
-                    s = (Convert.ToInt32(stopTime2[5]) - Convert.ToInt32(startTime2[5])).ToString();
-                }
+                    if (Convert.ToInt32(startTime2[4]) > Convert.ToInt32(stopTime2[4]) && Convert.ToInt32(startTime2[3]) < Convert.ToInt32(stopTime2[3]))
+                    {
+                        m = (60 - Convert.ToInt32(startTime2[4]) + Convert.ToInt32(stopTime2[4])).ToString();
+                    }
+                    else
+                    {
+                        m = (Convert.ToInt32(stopTime2[4]) - Convert.ToInt32(startTime2[4])).ToString();
+                    }
 
-                timeTaken = (h + ":" + m + ":" + s);
+                    if (Convert.ToInt32(startTime2[5]) > Convert.ToInt32(stopTime2[5]) && Convert.ToInt32(startTime2[4]) < Convert.ToInt32(stopTime2[4]))
+                    {
+                        s = (60 - Convert.ToInt32(startTime2[5]) + Convert.ToInt32(stopTime2[5])).ToString();
+                    }
+                    else
+                    {
+                        s = (Convert.ToInt32(stopTime2[5]) - Convert.ToInt32(startTime2[5])).ToString();
+                    }
 
-                string conn = "Data Source=ANI-L5P11\\SQLEXPRESS;Initial Catalog=TimeManagement;Integrated Security=True";
-                SqlConnection con = new SqlConnection(conn);
+                    timeTaken = (h + ":" + m + ":" + s);
 
-                SqlCommand sqlCommand = new SqlCommand(@"INSERT INTO [dbo].[TimeManager2]
+                    string conn = "Data Source=ANI-L5P11\\SQLEXPRESS;Initial Catalog=TimeManagement;Integrated Security=True";
+                    SqlConnection con = new SqlConnection(conn);
+
+                    SqlCommand sqlCommand = new SqlCommand(@"INSERT INTO [dbo].[TimeManager2]
            ([startTime]
            ,[endTime]
            ,[timeTaken]
            ,[Activity])
      VALUES
            ('" + startTime + "','" + endTime + "','" + timeTaken + "','" + Activity + "') ", con);
-                con.Open();
-                sqlCommand.ExecuteNonQuery();
-                con.Close();
-                MessageBox.Show("Data Entered Successfully");
+                    con.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Data Entered Successfully");
 
-                this.Close();
+                    this.Close();
+                }
+
+                else
+                {
+                    MessageBox.Show("Enter Activity Name");
+                }
+                
             }
             else
             {
