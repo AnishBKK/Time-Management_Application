@@ -22,7 +22,7 @@ namespace MiniProject_1
             tmrStp.Visible = true;
             tmrStr.Visible = false;
             EntData.Visible = false;
-            startTime = DateTime.Now.ToString("dd/MM/yy h:mm:ss tt");
+            startTime = DateTime.Now.ToString("dd/MM/yy HH:mm:ss tt");
 
             timer.Start();
         }
@@ -32,7 +32,7 @@ namespace MiniProject_1
             tmrStr.Visible = true;
             tmrStp.Visible = false;
             EntData.Visible = true;
-            stopTime = DateTime.Now.ToString("dd/MM/yy h:mm:ss tt");
+            stopTime = DateTime.Now.ToString("dd/MM/yy HH:mm:ss tt");
 
             timer.Stop();
         }

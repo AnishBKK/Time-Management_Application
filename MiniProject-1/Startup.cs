@@ -26,7 +26,7 @@ namespace MiniProject_1
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string startTime = DateTime.Now.ToString("dd/MM/yy h:mm:ss tt"), endTime = DateTime.Now.ToString("dd/MM/yy h:mm:ss tt");
+            string startTime = DateTime.Now.ToString("dd/MM/yy HH:mm:ss"), endTime = DateTime.Now.ToString("dd/MM/yy HH:mm:ss");
             Form2 f2 = new Form2(startTime, endTime);
             f2.Show();
 

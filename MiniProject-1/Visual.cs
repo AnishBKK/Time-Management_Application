@@ -46,9 +46,11 @@ namespace MiniProject_1
             string[] Activity = ActivityList.ToArray();
             string[] startTime = DateStartList.ToArray();
             string[] endTime = DateEndList.ToArray();
+
             int[] totalseconds = new int[timeTaken.Length];
-            int[] startedTime = new int[timeTaken.Length];
-            int[] stoppedTime = new int[timeTaken.Length];
+            int[] startedTime = new int[startTime.Length];
+            int[] stoppedTime = new int[endTime.Length];
+            string[] selectedActivity = new string[Activity.Length];
 
             for (int i = 0; i < startTime.Length; i++)
             {
@@ -64,11 +66,15 @@ namespace MiniProject_1
                     string[] l = new string[a.Length];
                     l = a.Split(':');
                     totalseconds[i] = ((Convert.ToInt32(l[0]) * 3600) + (Convert.ToInt32(l[1]) * 60) + (Convert.ToInt32(l[2])));
+                    selectedActivity[i] = Activity[i];
                 }
             }
 
-            chart1.Series["Day"].Points.DataBindXY(Activity, totalseconds);
-            chart1.Titles.Add(DateTime.Now.ToString("dd/MM/yy"));
+            selectedActivity = selectedActivity.Where(a => a != null).ToArray();
+            totalseconds = totalseconds.Where(a => a != 0).ToArray();
+
+            chart1.Series["Day"].Points.DataBindXY(selectedActivity, totalseconds);
+            chart1.Titles.Add(date);
         }
     }
 }
